@@ -1,0 +1,10 @@
+/target/
+/.settings/*
+**/.DS_Store
+/.classpath
+/.project
+/logs/*
+*.log
+*.trc
+/lib/*
+**/log4j*

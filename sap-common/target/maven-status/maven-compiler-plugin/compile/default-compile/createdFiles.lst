@@ -1,0 +1,4 @@
+com/google/cloud/datafusion/plugin/util/GCSPath.class
+com/google/cloud/datafusion/plugin/util/ResourceText.class
+com/google/cloud/datafusion/plugin/util/ResourceConstants.class
+com/google/cloud/datafusion/plugin/util/Util.class

@@ -1,0 +1,46 @@
+{
+  "type": "record",
+  "name": "columnMetadata",
+  "fields": [
+    {
+      "name": "MANDT",
+      "type": "string"
+    },
+    {
+      "name": "VBELN",
+      "type": "string"
+    },
+    {
+      "name": "ERDAT",
+      "type": [
+        {
+          "type": "int",
+          "logicalType": "date"
+        },
+        "null"
+      ]
+    },
+    {
+      "name": "ERZET",
+      "type": [
+        {
+          "type": "int",
+          "logicalType": "time-millis"
+        },
+        "null"
+      ]
+    },
+    {
+      "name": "NETWR",
+      "type": [
+        {
+          "type": "bytes",
+          "logicalType": "decimal",
+          "precision": 15,
+          "scale": 2
+        },
+        "null"
+      ]
+    }
+  ]
+}

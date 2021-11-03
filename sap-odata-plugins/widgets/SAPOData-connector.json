@@ -1,0 +1,72 @@
+{
+  "metadata":{
+    "spec-version":"1.5"
+  },
+  "display-name":"SAPOData",
+  "configuration-groups":[
+    {
+      "label":"Basic",
+      "properties":[
+        {
+          "widget-type":"textbox",
+          "label":"SAP OData Base URL",
+          "name":"baseURL",
+          "widget-attributes":{
+            "placeholder":"SAP OData base url e.g. http://<ip:port>, https://<hostname>"
+          }
+        },
+        {
+          "widget-type":"radio-group",
+          "label":"OData Version",
+          "name":"oDataVersion",
+          "widget-attributes":{
+            "layout":"inline",
+            "default":"v2",
+            "options":[
+              {
+                "id":"v2",
+                "label":"OData Version 2.0"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "label":"Credentials",
+      "properties":[
+        {
+          "widget-type":"radio-group",
+          "label":"Security Type",
+          "name":"securityType",
+          "widget-attributes":{
+            "layout":"inline",
+            "default":"basic",
+            "options":[
+              {
+                "id":"basic",
+                "label":"Basic (via Username and Password)"
+              }
+            ]
+          }
+        },
+        {
+          "widget-type":"textbox",
+          "label":"SAP Logon Username",
+          "name":"username",
+          "widget-attributes":{
+            "placeholder":""
+          }
+        },
+        {
+          "widget-type":"password",
+          "label":"SAP Logon Password",
+          "name":"password",
+          "widget-attributes":{
+            "placeholder":""
+          }
+        }
+      ]
+    }
+  ]
+}

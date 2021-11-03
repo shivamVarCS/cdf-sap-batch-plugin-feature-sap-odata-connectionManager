@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx"
+           xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"
+           xmlns:sap="http://www.sap.com/Protocols/SAPData">
+  <edmx:DataServices m:DataServiceVersion="2.0">
+    <Schema Namespace="ZDATA_TYPE_ODATA_SRV" xml:lang="en" sap:schema-version="1"
+            xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+      <EntityType Name="NEWTYP" sap:content-version="1">
+        <Key>
+          <PropertyRef Name="Mandt"/>
+          <PropertyRef Name="Sno"/>
+        </Key>
+        <Property Name="Mandt" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Client"
+                  sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+        <Property Name="Sno" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false"
+                  sap:label="Bill. schema st" sap:creatable="false" sap:updatable="false" sap:sortable="false"
+                  sap:filterable="false"/>
+        <Property Name="Accp" Type="Edm.String" Nullable="false" MaxLength="6" sap:unicode="false" sap:label="Period"
+                  sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+        <Property Name="Zchar" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false"
+                  sap:label="SETR Default" sap:creatable="false" sap:updatable="false" sap:sortable="false"
+                  sap:filterable="false"/>
+        <Property Name="Clnt" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Client"
+                  sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+        <Property Name="Cuky" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false"
+                  sap:label="Price Currency" sap:creatable="false" sap:updatable="false" sap:sortable="false"
+                  sap:filterable="false" sap:semantics="currency-code"/>
+        <Property Name="Curr" Type="Edm.Decimal" Nullable="false" Precision="25" Scale="3" sap:unicode="false"
+                  sap:unit="Cuky" sap:label="Net Price" sap:creatable="false" sap:updatable="false" sap:sortable="false"
+                  sap:filterable="false"/>
+        <Property Name="Datn" Type="Edm.DateTime" Nullable="false" Precision="7" sap:unicode="false" sap:label="DATN"
+                  sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+        <Property Name="Dats" Type="Edm.DateTime" Nullable="false" Precision="7" sap:unicode="false" sap:label="Date"
+                  sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+        <Property Name="Zdec" Type="Edm.Decimal" Nullable="false" Precision="31" Scale="8" sap:unicode="false"
+                  sap:label="Calc. Rel. Value" sap:creatable="false" sap:updatable="false" sap:sortable="false"
+                  sap:filterable="false"/>
+        <Property Name="Df16Dec" Type="Edm.Decimal" Nullable="false" Precision="15" Scale="6" sap:unicode="false"
+                  sap:label="Large Number" sap:creatable="false" sap:updatable="false" sap:sortable="false"
+                  sap:filterable="false"/>
+        <Property Name="Df16Raw" Type="Edm.Decimal" Nullable="false" Precision="16" Scale="6" sap:unicode="false"
+                  sap:label="TO: DECFLOAT (don't use/change it) - DF16_RAW" sap:creatable="false" sap:updatable="false"
+                  sap:sortable="false" sap:filterable="false"/>
+        <Property Name="Df16Scl" Type="Edm.Decimal" Nullable="false" Precision="16" Scale="6" sap:unicode="false"
+                  sap:label="TO: DECFLOAT (don't use/change it) - DF16_SCL" sap:creatable="false" sap:updatable="false"
+                  sap:sortable="false" sap:filterable="false"/>
+        <Property Name="Df16int2" Type="Edm.Int16" Nullable="false" sap:unicode="false" sap:label="INT2"
+                  sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+        <Property Name="Df34Dec" Type="Edm.Decimal" Nullable="false" Precision="31" Scale="6" sap:unicode="false"
+                  sap:label="Price" sap:creatable="false" sap:updatable="false" sap:sortable="false"
+                  sap:filterable="false"/>
+        <Property Name="Df34Scl" Type="Edm.Decimal" Nullable="false" Precision="34" Scale="6" sap:unicode="false"
+                  sap:label="TO: DECFLOAT (don't use/change it) - DF34_SCL" sap:creatable="false" sap:updatable="false"
+                  sap:sortable="false" sap:filterable="false"/>
+        <Property Name="Df34int2" Type="Edm.Int16" Nullable="false" sap:unicode="false" sap:label="INT2"
+                  sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+        <Property Name="Fltp" Type="Edm.Double" Nullable="false" sap:unicode="false" sap:label="Mass"
+                  sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+        <Property Name="Int1" Type="Edm.Byte" Nullable="false" sap:unicode="false" sap:label="INT1"
+                  sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+        <Property Name="Int2" Type="Edm.Int16" Nullable="false" sap:unicode="false" sap:label="INT2"
+                  sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+        <Property Name="Int8" Type="Edm.Int64" Nullable="false" sap:unicode="false" sap:label="Number"
+                  sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+        <Property Name="Lang" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Language"
+                  sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+        <Property Name="Numc" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false"
+                  sap:label="Stock Number" sap:creatable="false" sap:updatable="false" sap:sortable="false"
+                  sap:filterable="false"/>
+        <Property Name="Prec" Type="Edm.Int16" Nullable="false" sap:unicode="false" sap:label="PREC"
+                  sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+        <Property Name="Quan" Type="Edm.Decimal" Nullable="false" Precision="28" Scale="3" sap:unicode="false"
+                  sap:unit="Unit" sap:label="Distance" sap:creatable="false" sap:updatable="false" sap:sortable="false"
+                  sap:filterable="false"/>
+        <Property Name="Zrawint4" Type="Edm.Int32" Nullable="false" sap:unicode="false" sap:label="INT4"
+                  sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+        <Property Name="Zraw" Type="Edm.Binary" Nullable="false" sap:unicode="false" sap:label="Data Field"
+                  sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+        <Property Name="Rawstring" Type="Edm.Binary" Nullable="false" sap:unicode="false" sap:label="XSTRING"
+                  sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+        <Property Name="Sstring" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false"
+                  sap:label="Search String" sap:creatable="false" sap:updatable="false" sap:sortable="false"
+                  sap:filterable="false"/>
+        <Property Name="Zstring" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="String"
+                  sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+        <Property Name="Timn" Type="Edm.Time" Nullable="false" Precision="0" sap:unicode="false" sap:label="TIMN"
+                  sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+        <Property Name="Tims" Type="Edm.Time" Nullable="false" Precision="0" sap:unicode="false"
+                  sap:label="Field of type TIMS" sap:creatable="false" sap:updatable="false" sap:sortable="false"
+                  sap:filterable="false"/>
+        <Property Name="Unit" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Unit"
+                  sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"
+                  sap:semantics="unit-of-measure"/>
+        <Property Name="Utclong" Type="Edm.DateTime" Nullable="false" Precision="7" sap:unicode="false"
+                  sap:label="Time Stamp" sap:creatable="false" sap:updatable="false" sap:sortable="false"
+                  sap:filterable="false"/>
+        <Property Name="Varcint4" Type="Edm.Int32" Nullable="false" sap:unicode="false" sap:label="INT4"
+                  sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+        <Property Name="Lchrint2" Type="Edm.Int16" Nullable="false" sap:unicode="false" sap:label="INT2"
+                  sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+        <Property Name="Lchr" Type="Edm.String" Nullable="false" MaxLength="4096" sap:unicode="false"
+                  sap:label="Data Element for L Char" sap:creatable="false" sap:updatable="false" sap:sortable="false"
+                  sap:filterable="false"/>
+      </EntityType>
+      <EntityContainer Name="ZDATA_TYPE_ODATA_SRV_Entities" m:IsDefaultEntityContainer="true"
+                       sap:supported-formats="atom json xlsx">
+        <EntitySet Name="NEWTYPSet" EntityType="ZDATA_TYPE_ODATA_SRV.NEWTYP" sap:creatable="false" sap:updatable="false"
+                   sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+      </EntityContainer>
+      <atom:link rel="self" href="http://10.132.0.30:8000/sap/opu/odata/sap/ZDATA_TYPE_ODATA_SRV/$metadata"
+                 xmlns:atom="http://www.w3.org/2005/Atom"/>
+      <atom:link rel="latest-version" href="http://10.132.0.30:8000/sap/opu/odata/sap/ZDATA_TYPE_ODATA_SRV/$metadata"
+                 xmlns:atom="http://www.w3.org/2005/Atom"/>
+    </Schema>
+  </edmx:DataServices>
+</edmx:Edmx>

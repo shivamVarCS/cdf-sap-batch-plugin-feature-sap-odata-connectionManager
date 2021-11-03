@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: io.cdap.plugin:hydrator-common:2.8.0-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/io/cdap/plugin/hydrator-common/2.8.0-SNAPSHOT/hydrator-common-2.8.0-20211101.035504-176.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/io/cdap/plugin/hydrator-common/2.8.0-SNAPSHOT/hydrator-common-2.8.0-20211101.035504-176-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/io/cdap/plugin/hydrator-common/2.8.0-SNAPSHOT/hydrator-common-2.8.0-20211101.035504-176-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

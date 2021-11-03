@@ -1,0 +1,272 @@
+{
+  "metadata": {
+    "spec-version": "1.5"
+  },
+  "display-name": "SAP Table",
+  "configuration-groups": [
+    {
+      "label": "Basic",
+      "properties": [
+        {
+          "widget-type": "textbox",
+          "label": "Reference Name",
+          "name": "referenceName",
+          "widget-attributes": {
+            "placeholder": "Name used to identify this source for lineage"
+          }
+        },
+        {
+          "widget-type": "textbox",
+          "label": "SAP Client",
+          "name": "jco.client.client",
+          "widget-attributes": {
+            "placeholder": "Ex: 400",
+            "max-length": "3"
+          }
+        },
+        {
+          "widget-type": "textbox",
+          "label": "SAP Language",
+          "name": "jco.client.lang",
+          "widget-attributes": {
+            "placeholder": "Ex: DE, EN, JP etc.",
+            "default": "EN"
+          }
+        },
+        {
+          "widget-type": "radio-group",
+          "label": "Connection Type",
+          "name": "connType",
+          "widget-attributes": {
+            "layout": "inline",
+            "default": "directClient",
+            "options": [
+              {
+                "id": "directClient",
+                "label": "Direct (via SAP Application Server)"
+              },
+              {
+                "id": "msgServer",
+                "label": "Load Balanced (via SAP Message Server)"
+              }
+            ]
+          }
+        },
+        {
+          "widget-type": "textbox",
+          "label": "SAP Application Server Host",
+          "name": "jco.client.ashost",
+          "widget-attributes": {
+            "placeholder": "SAP Application Server (AS) Hostname or IP"
+          }
+        },
+        {
+          "widget-type": "textbox",
+          "label": "SAP System Number",
+          "name": "jco.client.sysnr",
+          "widget-attributes": {
+            "placeholder": "Ex: 01"
+          }
+        },
+        {
+          "widget-type": "textbox",
+          "label": "SAP Router",
+          "name": "jco.client.saprouter",
+          "widget-attributes": {
+            "placeholder": "SAP Router String"
+          }
+        },
+        {
+          "widget-type": "textbox",
+          "label": "SAP Message Server Host",
+          "name": "jco.client.mshost",
+          "widget-attributes": {
+            "placeholder": "SAP Message Server (MS) Hostname or IP"
+          }
+        },
+        {
+          "widget-type": "textbox",
+          "label": "SAP Message Server Service or Port Number",
+          "name": "jco.client.msserv",
+          "widget-attributes": {
+            "placeholder": "Ex: sapms02 or 3602"
+          }
+        },
+        {
+          "widget-type": "textbox",
+          "label": "SAP System ID (SID)",
+          "name": "jco.client.r3name",
+          "widget-attributes": {
+            "placeholder": ""
+          }
+        },
+        {
+          "widget-type": "textbox",
+          "label": "SAP Logon Group Name",
+          "name": "jco.client.group",
+          "widget-attributes": {
+            "placeholder": "Ex: PUBLIC",
+            "default": "PUBLIC"
+          }
+        },
+        {
+          "widget-type": "textbox",
+          "label": "SAP Table/View Name",
+          "name": "sapTable",
+          "widget-attributes": {
+            "placeholder": "Ex: VBAK"
+          },
+          "plugin-function": {
+            "method": "POST",
+            "widget": "outputSchema",
+            "plugin-method": "getSchema"
+          }
+        }
+      ]
+    },
+
+    {
+      "label": "Credentials",
+      "properties": [
+        {
+          "widget-type": "textbox",
+          "label": "SAP Logon Username",
+          "name": "jco.client.user"
+        },
+        {
+          "widget-type": "password",
+          "label": "SAP Logon Password",
+          "name": "jco.client.passwd"
+        }
+      ]
+    },
+
+    {
+      "label": "SAP JCo Details",
+      "properties": [
+        {
+          "widget-type": "textbox",
+          "label": "GCP Project ID",
+          "name": "gcpProjectId",
+          "widget-attributes": {
+            "default": "auto-detect"
+          }
+        },
+        {
+          "widget-type": "textbox",
+          "label": "SAP JCo Library GCS Path",
+          "name": "gcsPath",
+          "widget-attributes": {
+            "placeholder": "Google Cloud Storage path having SAP JCo libraries. Ex: gs://cdf-sap-dependent-files/v3_0_20"
+          }
+        }
+      ]
+    },
+
+    {
+      "label": "Advanced",
+      "properties": [
+        {
+          "widget-type": "textbox",
+          "label": "Filter Options",
+          "name": "options",
+          "widget-attributes": {
+            "placeholder": "Ex: KEY6 LT '25' AND KEY4 EQ '93'"
+          }
+        },
+        {
+          "widget-type": "number",
+          "label": "Number of Rows to Fetch",
+          "name": "rowsToFetch",
+          "widget-attributes": {
+            "min": "0"
+          }
+        },
+        {
+          "widget-type": "number",
+          "label": "Number of Splits to Generate",
+          "name": "numSplits",
+          "widget-attributes": {
+            "min": "0"
+          }
+        },
+        {
+          "widget-type": "number",
+          "label": "Package Size",
+          "name": "packageSize",
+          "widget-attributes": {
+            "min": "0"
+          }
+        }
+      ]
+    }
+  ],
+
+  "outputs": [
+    {
+      "name": "schema",
+      "widget-type": "schema",
+      "widget-attributes": {
+        "schema-types": [
+          "int",
+          "long",
+          "double",
+          "bytes",
+          "string"
+        ],
+        "schema-default-type": "string"
+      }
+    }
+  ],
+
+  "filters": [
+    {
+      "name": "directClient",
+      "condition": {
+        "property": "connType",
+        "operator": "equal to",
+        "value": "directClient"
+      },
+      "show": [
+        {
+          "name": "jco.client.ashost",
+          "type": "property"
+        },
+        {
+          "name": "jco.client.sysnr",
+          "type": "property"
+        },
+        {
+          "name": "jco.client.saprouter",
+          "type": "property"
+        }
+      ]
+    },
+    {
+      "name": "msgServer",
+      "condition": {
+        "property": "connType",
+        "operator": "equal to",
+        "value": "msgServer"
+      },
+      "show": [
+        {
+          "name": "jco.client.mshost",
+          "type": "property"
+        },
+        {
+          "name": "jco.client.msserv",
+          "type": "property"
+        },
+        {
+          "name": "jco.client.r3name",
+          "type": "property"
+        },
+        {
+          "name": "jco.client.group",
+          "type": "property"
+        }
+      ]
+    }
+  ]
+}

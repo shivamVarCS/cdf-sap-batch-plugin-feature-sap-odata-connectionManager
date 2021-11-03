@@ -1,0 +1,24 @@
+[{
+	"name": "etlSchemaBody",
+	"schema": {
+		"name": "fileRecord",
+		"type": "record",
+		"fields": [{
+				"name": "offset",
+				"type": "long"
+			},
+			{
+				"name": "body",
+				"type": "string"
+			},
+			{
+				"name": "service",
+				"type": "string "
+			},
+			{
+				"name": "entity",
+				"type": "string"
+			}
+		]
+	}
+}]

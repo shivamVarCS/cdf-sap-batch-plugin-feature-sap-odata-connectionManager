@@ -1,0 +1,572 @@
+************************************************************************
+* RFM           : /GOOG/RFC_READ_TABLE                                 *
+* CREATION DATE :  10/12/2020                                          *
+* REFERENCE     : CDF Read Table option                                *
+* TRANSPORT     :  ABAK900039                                          *
+*----------------------------------------------------------------------*
+* DESCRIPTION                                                          *
+* RFM for extracting data from SAP and push it to CDF
+* Standard SAP Data Service RFM /SAPDS/RFC_READ_TABLE2 is used as
+* baseline
+* Changes done in RFM /SAPDS/RFC_READ_TABLE2
+* Added the logic for providing total number of records
+* Changed the logic for ROWSKIPS and ROWCOUNT. The existing RFM uses
+* 'SELECT'.. ‘ENDSELECT’ for row skipping which takes longer time as it
+* reads all the records, even if they are meant to be skipped. We are
+* using OFFSET for ROWSKIPS.
+**----------------------------------------------------------------------*
+************************************************************************
+FUNCTION /goog/rfc_read_table.
+*"----------------------------------------------------------------------
+*"*"Local Interface:
+*"  IMPORTING
+*"     VALUE(QUERY_TABLE) TYPE  DD02L-TABNAME
+*"     VALUE(NO_DATA) TYPE  SONV-FLAG OPTIONAL
+*"     VALUE(ROWSKIPS) TYPE  I OPTIONAL
+*"     VALUE(ROWCOUNT) TYPE  I OPTIONAL
+*"     VALUE(IM_REC_COUNT) TYPE  SONV-FLAG OPTIONAL
+*"  EXPORTING
+*"     VALUE(OUT_TABLE) TYPE  DD02L-TABNAME
+*"     VALUE(EX_COUNT) TYPE  SY-DBCNT
+*"  TABLES
+*"      OPTIONS STRUCTURE  /GOOG/RFC_DB_OPT
+*"      FIELDS STRUCTURE  RFC_DB_FLD
+*"      TBLOUT128 STRUCTURE  /GOOG/TAB128
+*"      TBLOUT512 STRUCTURE  /GOOG/TAB512
+*"      TBLOUT2048 STRUCTURE  /GOOG/TAB2048
+*"      TBLOUT8192 STRUCTURE  /GOOG/TAB8192
+*"      TBLOUT30000 STRUCTURE  /GOOG/TAB30K
+*"  EXCEPTIONS
+*"      TABLE_NOT_AVAILABLE
+*"      TABLE_WITHOUT_DATA
+*"      OPTION_NOT_VALID
+*"      FIELD_NOT_VALID
+*"      NOT_AUTHORIZED
+*"      DATA_BUFFER_EXCEEDED
+*"      SQL_FAILURE
+*"----------------------------------------------------------------------
+
+  PERFORM goog_rfc_read_table_form
+    TABLES
+       options
+       fields
+       tblout128
+       tblout512
+       tblout2048
+       tblout8192
+       tblout30000
+    USING
+       query_table
+** Code commented
+       "delimiter
+** EOC
+       no_data
+       rowskips
+       rowcount
+       im_rec_count
+    CHANGING
+       out_table
+       ex_count.
+
+
+ENDFUNCTION.
+*----------------------------------------------------------------------*
+*&      Form  goog_rfc_read_table_form
+*&---------------------------------------------------------------------*
+*  Extracting data from SAP and push it to CDF
+*----------------------------------------------------------------------*
+*      -->P_OPTIONS  text
+*      -->P_FIELDS  text
+*      -->P_TBLOUT128  text
+*      -->P_TBLOUT512  text
+*      -->P_TBLOUT2048  text
+*      -->P_TBLOUT8192  text
+*      -->P_TBLOUT30000  text
+*      -->P_QUERY_TABLE  text
+*      -->P_DELIMITER  text
+*      -->P_NO_DATA  text
+*      -->P_ROWSKIPS  text
+*      -->P_ROWCOUNT  text
+*      -->P_IM_REC_COUNT  text
+*      <--P_OUT_TABLE  text
+*      <--P_EX_COUNT  text
+*----------------------------------------------------------------------*
+
+FORM goog_rfc_read_table_form
+    TABLES
+    options STRUCTURE  rfc_db_opt
+    fields STRUCTURE  rfc_db_fld
+    tblout128 STRUCTURE  /goog/tab128
+    tblout512 STRUCTURE  /goog/tab512
+    tblout2048 STRUCTURE  /goog/tab2048
+    tblout8192 STRUCTURE  /goog/tab8192
+    tblout30000 STRUCTURE  /goog/tab30k
+    USING
+    query_table LIKE  dd02l-tabname
+** Code commented
+   " delimiter LIKE  sonv-flag
+** EOC
+    no_data LIKE  sonv-flag
+    VALUE(rowskips) LIKE  soid-accnt
+    VALUE(rowcount) LIKE  soid-accnt
+    im_rec_count LIKE sy-debug
+    CHANGING
+    outtab LIKE  dd02l-tabname
+    ex_count LIKE sy-dbcnt.
+
+  CONSTANTS : c_129       TYPE i VALUE 129,
+              c_513       TYPE i VALUE 513,
+              c_2049      TYPE i VALUE 2049,
+              c_8193      TYPE i VALUE 8193,
+              c_30001     TYPE i VALUE 30001,
+              c_50000     TYPE i VALUE 50000,
+              c_data_type TYPE DYNPTYPE VALUE 'UTCL',
+              c_leng      type DDLENG value '000027'.
+
+  DATA: mylist TYPE string_hashed_table.
+  DATA line1 TYPE string.
+  DATA options_new LIKE TABLE OF rfc_db_opt WITH HEADER LINE.
+  DATA orders_new LIKE TABLE OF rfc_db_opt WITH HEADER LINE.
+  DATA number_of_fields TYPE i.
+  DATA tabtype TYPE i.
+  DATA d_wref TYPE REF TO data.
+  DATA: table_type TYPE dd02v-tabclass,
+        ls_x030l   TYPE x030l.
+  DATA dref TYPE REF TO data.
+  DATA: BEGIN OF tblout50000,
+          wa TYPE string.
+  DATA: END OF tblout50000.
+  DATA wa LIKE tblout50000.
+  DATA wa1 TYPE string.
+  DATA: isstring.
+  DATA BEGIN OF table_structure OCCURS 10.
+  INCLUDE STRUCTURE dfies.
+  DATA END OF table_structure.
+
+  DATA: BEGIN OF fields_int OCCURS 10,
+          fieldname  LIKE table_structure-fieldname,
+          type       LIKE table_structure-inttype,
+          decimals   LIKE table_structure-decimals,
+          length_src LIKE table_structure-intlen,
+          length_dst LIKE table_structure-leng,
+          offset_src LIKE table_structure-offset,
+          offset_dst LIKE table_structure-offset,
+        END OF fields_int,
+        line_cursor TYPE i.
+** Code commented
+*  DATA: BEGIN OF work,
+*          align         TYPE f,
+*          buffer(30000),
+*        END OF work.
+** EOC
+  DATA lv_table TYPE string.                                "#EC NEEDED
+  DATA query_table1 TYPE dd02l-tabname.
+  DATA : spaces TYPE i.
+  FIELD-SYMBOLS: <wa>   TYPE any, <comp> TYPE any.
+  FIELD-SYMBOLS <fs_tab> TYPE STANDARD TABLE.
+  FIELD-SYMBOLS <d>.
+
+  CALL FUNCTION 'VIEW_AUTHORITY_CHECK'
+    EXPORTING
+      view_action                    = 'S'
+      view_name                      = query_table
+    EXCEPTIONS
+      no_authority                   = 2
+      no_clientindependent_authority = 2
+      no_linedependent_authority     = 2
+      OTHERS                         = 1.
+
+  IF sy-subrc = 2.
+    RAISE not_authorized.
+  ELSEIF sy-subrc = 1.
+    RAISE table_not_available.
+  ENDIF.
+
+* ---------------------------------------------
+*  find out about the structure of QUERY_TABLE
+* ---------------------------------------------
+  CALL FUNCTION 'DDIF_FIELDINFO_GET'
+    EXPORTING
+      tabname        = query_table
+*     FIELDNAME      = '' ''
+*     LANGU          = SY-LANGU
+*     LFIELDNAME     = '' ''
+*     ALL_TYPES      = '' ''
+*     GROUP_NAMES    = '' ''
+    IMPORTING
+      x030l_wa       = ls_x030l
+      ddobjtype      = table_type
+*     DFIES_WA       =
+*     LINES_DESCR    =
+    TABLES
+      dfies_tab      = table_structure
+*     FIXED_VALUES   =
+    EXCEPTIONS
+      not_found      = 1
+      internal_error = 2
+      OTHERS         = 3.
+  IF sy-subrc <> 0.
+    RAISE table_not_available.
+  ENDIF.
+  IF table_type = 'INTTAB'.
+    RAISE table_without_data.
+  ENDIF.
+
+  DELETE table_structure WHERE leng IS INITIAL.
+  TRY.
+      IF im_rec_count = abap_true.
+*   get exact figures
+        SELECT COUNT( * ) FROM (query_table)
+            WHERE (options[]).
+        IF sy-subrc = 0.
+          ex_count = sy-dbcnt.
+        ELSE.
+          ex_count = 0.
+        ENDIF.
+      ENDIF.
+    CATCH cx_sy_open_sql_error.
+      RAISE sql_failure.
+  ENDTRY.
+
+* --------------------------------------------
+*  isolate first field of DATA as output field
+*  (i.e. allow for changes to structure DATA!)
+* --------------------------------------------
+* ------------------------------------
+*  if FIELDS are not specified, read
+*  all available fields
+* ------------------------------------
+
+  DESCRIBE TABLE fields LINES number_of_fields.
+  IF number_of_fields = 0.
+    LOOP AT table_structure.
+      MOVE table_structure-fieldname
+      TO fields-fieldname.
+      APPEND fields.
+    ENDLOOP.
+  ENDIF.
+
+* ---------------------------------------------
+*  for each field which has to be read, copy
+*  structure information into tables FIELDS_INT
+* (internal use) and FIELDS (output)
+* ---------------------------------------------
+  line_cursor = 0.
+*  for each field which has to be read ...
+  LOOP AT fields.
+
+    READ TABLE table_structure WITH
+    KEY fieldname = fields-fieldname.
+    IF sy-subrc NE 0.
+      RAISE field_not_valid.
+    ENDIF.
+
+* compute the place for field contents in DATA rows:
+* if not first field in row, allow space
+* for delimiter
+** Code commented
+*    IF line_cursor <> 0.
+*      IF no_data EQ space AND delimiter NE space.
+*        MOVE delimiter TO tblout30000-wa+line_cursor.
+*      ENDIF.
+*      line_cursor = line_cursor + strlen( delimiter ).
+*    ENDIF.
+** EOC
+
+* ... copy structure information into tables FIELDS_INT
+* (which is used internally during SELECT) ...
+    fields_int-fieldname  = table_structure-fieldname.
+    fields_int-length_src = table_structure-intlen.
+    IF table_structure-datatype = c_data_type.
+      fields_int-length_dst = c_leng.
+    ELSE.
+      fields_int-length_dst = table_structure-leng.
+    ENDIF.
+    fields_int-offset_src = table_structure-offset.
+    fields_int-offset_dst = line_cursor.
+    fields_int-type       = table_structure-inttype.
+    fields_int-decimals   = table_structure-decimals.
+    IF fields_int-type = 'P'.
+                                                        "#EC CI_INT8_OK
+      fields_int-length_dst = fields_int-length_dst + 1.
+      IF fields_int-decimals IS NOT INITIAL.
+        fields_int-length_dst = fields_int-length_dst + 1.
+      ENDIF.
+    ELSEIF fields_int-type = 'X'.
+      fields_int-length_dst = fields_int-length_dst * 2.
+    ELSEIF table_structure-inttype = 'b' OR
+      table_structure-inttype = 's' OR
+      table_structure-inttype = 'I'.
+      fields_int-length_dst = fields_int-length_dst + 1.
+    ELSEIF table_structure-inttype = 'g'
+      OR table_structure-inttype = 'y' .
+      isstring = 'Y'.
+    ENDIF.
+* compute the place for contents of next field
+* in DATA rows
+
+    line_cursor = line_cursor + fields_int-length_dst.
+    APPEND fields_int.
+
+* ... and into table FIELDS (which is output to
+* the caller)
+    fields-fieldtext = table_structure-fieldtext.
+    fields-type      = table_structure-inttype.
+    fields-length    = fields_int-length_dst.
+    fields-offset    = fields_int-offset_dst.
+    MODIFY fields.
+
+  ENDLOOP.
+* end of loop at FIELDS
+
+
+  IF line_cursor < c_129.
+    outtab = 'TBLOUT128'.
+    tabtype = 1.
+    MOVE tblout30000-wa+0(128) TO tblout128-wa.
+    ASSIGN COMPONENT 0 OF STRUCTURE tblout128 TO <d>.
+  ELSEIF line_cursor < c_513.
+    outtab = 'TBLOUT512'.
+    tabtype = 2.
+    MOVE tblout30000-wa+0(512) TO tblout512-wa.
+    ASSIGN COMPONENT 0 OF STRUCTURE tblout512 TO <d>.
+  ELSEIF line_cursor < c_2049.
+    outtab = 'TBLOUT2048'.
+    tabtype = 3.
+    MOVE tblout30000-wa+0(2048) TO tblout2048-wa.
+    ASSIGN COMPONENT 0 OF STRUCTURE tblout2048 TO <d>.
+  ELSEIF line_cursor < c_8193.
+    outtab = 'TBLOUT8192'.
+    tabtype = 4.
+    MOVE tblout30000-wa+0(8192) TO tblout8192-wa.
+    ASSIGN COMPONENT 0 OF STRUCTURE tblout8192 TO <d>.
+  ELSEIF line_cursor < c_30001.
+    outtab = 'TBLOUT30000'.
+    tabtype = 5.
+    ASSIGN COMPONENT 0 OF STRUCTURE tblout30000 TO <d>.
+  ELSEIF no_data EQ space.
+    RAISE data_buffer_exceeded.
+  ENDIF.
+
+  IF isstring = 'Y'.
+    outtab = 'TBLOUT30000'.
+    tabtype = 5.
+    ASSIGN COMPONENT 0 OF STRUCTURE tblout50000 TO <d>.
+    line_cursor = c_50000.
+  ENDIF.
+
+* ---------------------------------------------------
+*  read data from the database and copy relevant
+*  portions into DATA
+* ---------------------------------------------------
+* output data only if NO_DATA equals space (otherwise
+* the structure information in FIELDS is the only
+* result of the module)
+  IF no_data EQ space.
+** Code commented
+*    IF isstring IS INITIAL.
+*      ASSIGN work-buffer TO <wa> CASTING TYPE (query_table).
+*    ELSE.
+** EOC
+    CREATE DATA dref TYPE (query_table).
+    ASSIGN dref->* TO <wa>.
+** Code commented
+*    ENDIF.
+** EOC
+    TRY.
+        lv_table = cl_abap_dyn_prg=>check_table_name_str(
+          val = query_table
+          packages = '' ).
+      CATCH cx_abap_not_a_table
+            cx_abap_not_in_package   .
+        RAISE table_not_available.
+    ENDTRY.
+
+** Get the list of key fields
+    LOOP AT table_structure WHERE keyflag = abap_true .
+      TRY.
+          REFRESH mylist.
+          IF sy-tabix NE ls_x030l-keycnt.
+            CONCATENATE table_structure-fieldname ',' INTO table_structure-fieldname.
+          ENDIF.
+          line1 = table_structure-fieldname.
+          CONDENSE line1.
+          INSERT line1 INTO TABLE mylist.
+          orders_new-text = cl_abap_dyn_prg=>check_whitelist_tab(
+                                        val       = table_structure-fieldname
+                                        whitelist = mylist ).
+        CATCH cx_abap_not_in_whitelist.
+          RAISE field_not_valid.
+      ENDTRY.
+      APPEND orders_new.
+    ENDLOOP.
+
+    LOOP AT options.
+      TRY.
+          REFRESH mylist.
+          line1 = options-text.
+          CONDENSE line1.
+          INSERT line1 INTO TABLE mylist.
+          options_new-text = cl_abap_dyn_prg=>check_whitelist_tab(
+                                        val       = options-text
+                                        whitelist = mylist ).
+        CATCH cx_abap_not_in_whitelist.
+          RAISE option_not_valid.
+      ENDTRY.
+      APPEND options_new.
+    ENDLOOP.
+
+    TRY.
+        REFRESH mylist.
+        line1 = query_table.
+        CONDENSE line1.
+        INSERT line1 INTO TABLE mylist.
+        query_table1 = cl_abap_dyn_prg=>check_whitelist_tab(
+                                      val       = query_table
+                                      whitelist = mylist ).
+      CATCH cx_abap_not_in_whitelist.
+        RAISE table_not_available.
+    ENDTRY.
+
+    CREATE DATA d_wref TYPE STANDARD TABLE OF (query_table).
+    ASSIGN d_wref->* TO <fs_tab>.
+    IF sy-subrc = 0.
+      TRY.
+          IF options_new IS NOT INITIAL.
+            IF rowcount > 0.
+              rowskips = rowskips + 1.
+              rowcount = rowcount + rowskips.
+            ENDIF.
+** Get data from required table based on condition provided
+            SELECT * FROM (query_table1)
+              INTO TABLE <fs_tab> UP TO rowcount  ROWS
+            WHERE (options_new).
+            IF sy-subrc = 0.
+              LOOP AT <fs_tab> ASSIGNING <wa> FROM rowskips TO ( rowcount - 1 ).
+
+*   copy all relevant fields into DATA
+*   (output) table
+                LOOP AT fields_int.
+                  IF isstring = 'Y'.
+                    ASSIGN COMPONENT sy-tabix
+                           OF STRUCTURE <wa> TO <comp>.
+                    if sy-subrc = 0.
+                      MOVE <comp> TO wa1.
+                      CLEAR spaces.
+                      spaces = fields_int-length_dst - strlen( wa1 ).
+
+                      DO spaces TIMES.
+                        CONCATENATE wa1 space INTO wa1
+                        RESPECTING BLANKS.
+                      ENDDO.
+                      IF spaces < 0.
+                        CONCATENATE wa-wa wa1+0(fields_int-length_dst)  INTO wa-wa IN CHARACTER MODE RESPECTING BLANKS.
+                      else.
+                        CONCATENATE wa-wa wa1  INTO wa-wa IN CHARACTER MODE RESPECTING BLANKS.
+                      endif.
+                      CLEAR spaces.
+                    endif.
+                    CLEAR wa1.
+                  ELSE.
+                    IF fields_int-type = 'P'.
+                      ASSIGN COMPONENT fields_int-fieldname
+                      OF STRUCTURE <wa> TO <comp>
+                      TYPE     fields_int-type
+                      DECIMALS fields_int-decimals.
+                    ELSE.
+                      ASSIGN COMPONENT fields_int-fieldname
+                      OF STRUCTURE <wa> TO <comp>
+                      TYPE     fields_int-type.
+                    ENDIF.
+                    MOVE <comp> TO
+                    <d>+fields_int-offset_dst(fields_int-length_dst).
+                  ENDIF.
+                ENDLOOP.
+                IF isstring = 'Y'.
+                  tblout30000 = wa-wa.
+                ENDIF.
+
+                CASE tabtype.
+                  WHEN 1.      APPEND tblout128.
+                  WHEN 2.      APPEND tblout512.
+                  WHEN 3.      APPEND tblout2048.
+                  WHEN 4.      APPEND tblout8192.
+                  WHEN OTHERS. APPEND tblout30000.
+                ENDCASE.
+
+                IF isstring = 'Y'.
+                  CLEAR wa.
+                ENDIF.
+
+              ENDLOOP.
+            ENDIF.
+          ELSE.
+            SELECT * FROM (query_table1) ORDER BY (orders_new) INTO TABLE @<fs_tab> OFFSET @rowskips UP TO @rowcount  ROWS.
+            IF sy-subrc = 0.
+              LOOP AT <fs_tab> ASSIGNING <wa>.
+
+*   copy all relevant fields into DATA
+*   (output) table
+                LOOP AT fields_int.
+                  IF isstring = 'Y'.
+                    ASSIGN COMPONENT sy-tabix
+                           OF STRUCTURE <wa> TO <comp>.
+                    if sy-subrc = 0.
+                      MOVE <comp> TO wa1.
+                      CLEAR spaces.
+                      spaces = fields_int-length_dst - strlen( wa1 ).
+
+                      DO spaces TIMES.
+                        CONCATENATE wa1 space INTO wa1
+                        RESPECTING BLANKS.
+                      ENDDO.
+                      IF spaces < 0.
+                        CONCATENATE wa-wa wa1+0(fields_int-length_dst)  INTO wa-wa IN CHARACTER MODE RESPECTING BLANKS.
+                      else.
+                        CONCATENATE wa-wa wa1  INTO wa-wa IN CHARACTER MODE RESPECTING BLANKS.
+                      endif.
+                      CLEAR spaces.
+                    endif.
+                    CLEAR wa1.
+                  ELSE.
+                    IF fields_int-type = 'P'.
+                      ASSIGN COMPONENT fields_int-fieldname
+                      OF STRUCTURE <wa> TO <comp>
+                      TYPE     fields_int-type
+                      DECIMALS fields_int-decimals.
+                    ELSE.
+                      ASSIGN COMPONENT fields_int-fieldname
+                      OF STRUCTURE <wa> TO <comp>
+                      TYPE     fields_int-type.
+                    ENDIF.
+                    MOVE <comp> TO
+                    <d>+fields_int-offset_dst(fields_int-length_dst).
+                  ENDIF.
+                ENDLOOP.
+
+                IF isstring = 'Y'.
+                  tblout30000 = wa-wa.
+                ENDIF.
+
+                CASE tabtype.
+                  WHEN 1.      APPEND tblout128.
+                  WHEN 2.      APPEND tblout512.
+                  WHEN 3.      APPEND tblout2048.
+                  WHEN 4.      APPEND tblout8192.
+                  WHEN OTHERS. APPEND tblout30000.
+                ENDCASE.
+
+                IF isstring = 'Y'.
+                  CLEAR wa.
+                ENDIF.
+
+              ENDLOOP.
+            ENDIF.
+          ENDIF.
+        CATCH cx_sy_open_sql_error.
+          RAISE sql_failure.
+      ENDTRY.
+    ENDIF.
+  ENDIF.
+
+ENDFORM.

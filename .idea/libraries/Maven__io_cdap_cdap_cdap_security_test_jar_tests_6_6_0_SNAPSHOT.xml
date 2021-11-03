@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: io.cdap.cdap:cdap-security:test-jar:tests:6.6.0-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/io/cdap/cdap/cdap-security/6.6.0-SNAPSHOT/cdap-security-6.6.0-20211101.035024-132-tests.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/io/cdap/cdap/cdap-security/6.6.0-SNAPSHOT/cdap-security-6.6.0-20211101.035024-132-test-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/io/cdap/cdap/cdap-security/6.6.0-SNAPSHOT/cdap-security-6.6.0-20211101.035024-132-test-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

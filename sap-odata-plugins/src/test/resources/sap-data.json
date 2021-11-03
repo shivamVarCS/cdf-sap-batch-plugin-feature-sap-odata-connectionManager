@@ -1,0 +1,306 @@
+{
+  "d": {
+    "results": [
+      {
+        "__metadata": {
+          "id": "http://10.132.0.47:50000/sap/opu/odata/sap/C_GLACCOUNTHIERARCHYNODE_SRV/C_GLAccountHierarchyNode(GLAccountHierarchy='%24DE1',HierarchyNode='0%24DE1',ValidityEndDate=datetime'9999-12-31T00%3A00%3A00')",
+          "uri": "http://10.132.0.47:50000/sap/opu/odata/sap/C_GLACCOUNTHIERARCHYNODE_SRV/C_GLAccountHierarchyNode(GLAccountHierarchy='%24DE1',HierarchyNode='0%24DE1',ValidityEndDate=datetime'9999-12-31T00%3A00%3A00')",
+          "type": "C_GLACCOUNTHIERARCHYNODE_SRV.C_GLAccountHierarchyNodeType"
+        },
+        "GLAccountHierarchy": "$DE1",
+        "HierarchyNode": "0$DE1",
+        "ValidityEndDate": "/Date(253402214400000)/",
+        "ParentNode": "",
+        "HierarchyVersion": "1",
+        "ValidityStartDate": "/Date(1569369600000)/",
+        "ChartOfAccounts": "",
+        "GLAccount": "",
+        "SequenceNumber": "0000010$DE1",
+        "HierarchyNodeLevel": "1",
+        "NodeType": "R",
+        "SemanticTag": "",
+        "SACAccountType": "EXP",
+        "to_GLAccountInChartOfAccounts": {
+          "__deferred": {
+            "uri": "http://10.132.0.47:50000/sap/opu/odata/sap/C_GLACCOUNTHIERARCHYNODE_SRV/C_GLAccountHierarchyNode(GLAccountHierarchy='%24DE1',HierarchyNode='0%24DE1',ValidityEndDate=datetime'9999-12-31T00%3A00%3A00')/to_GLAccountInChartOfAccounts"
+          }
+        },
+        "to_Text": {
+          "__deferred": {
+            "uri": "http://10.132.0.47:50000/sap/opu/odata/sap/C_GLACCOUNTHIERARCHYNODE_SRV/C_GLAccountHierarchyNode(GLAccountHierarchy='%24DE1',HierarchyNode='0%24DE1',ValidityEndDate=datetime'9999-12-31T00%3A00%3A00')/to_Text"
+          }
+        }
+      },
+      {
+        "__metadata": {
+          "id": "http://10.132.0.47:50000/sap/opu/odata/sap/C_GLACCOUNTHIERARCHYNODE_SRV/C_GLAccountHierarchyNode(GLAccountHierarchy='%24DE1',HierarchyNode='00ASSETS',ValidityEndDate=datetime'9999-12-31T00%3A00%3A00')",
+          "uri": "http://10.132.0.47:50000/sap/opu/odata/sap/C_GLACCOUNTHIERARCHYNODE_SRV/C_GLAccountHierarchyNode(GLAccountHierarchy='%24DE1',HierarchyNode='00ASSETS',ValidityEndDate=datetime'9999-12-31T00%3A00%3A00')",
+          "type": "C_GLACCOUNTHIERARCHYNODE_SRV.C_GLAccountHierarchyNodeType"
+        },
+        "GLAccountHierarchy": "$DE1",
+        "HierarchyNode": "00ASSETS",
+        "ValidityEndDate": "/Date(253402214400000)/",
+        "ParentNode": "0$DE1",
+        "HierarchyVersion": "1",
+        "ValidityStartDate": "/Date(1569369600000)/",
+        "ChartOfAccounts": "",
+        "GLAccount": "",
+        "SequenceNumber": "00000100ASSETS",
+        "HierarchyNodeLevel": "2",
+        "NodeType": "N",
+        "SemanticTag": "",
+        "SACAccountType": "EXP",
+        "to_GLAccountInChartOfAccounts": {
+          "__deferred": {
+            "uri": "http://10.132.0.47:50000/sap/opu/odata/sap/C_GLACCOUNTHIERARCHYNODE_SRV/C_GLAccountHierarchyNode(GLAccountHierarchy='%24DE1',HierarchyNode='00ASSETS',ValidityEndDate=datetime'9999-12-31T00%3A00%3A00')/to_GLAccountInChartOfAccounts"
+          }
+        },
+        "to_Text": {
+          "__deferred": {
+            "uri": "http://10.132.0.47:50000/sap/opu/odata/sap/C_GLACCOUNTHIERARCHYNODE_SRV/C_GLAccountHierarchyNode(GLAccountHierarchy='%24DE1',HierarchyNode='00ASSETS',ValidityEndDate=datetime'9999-12-31T00%3A00%3A00')/to_Text"
+          }
+        }
+      },
+      {
+        "__metadata": {
+          "id": "http://10.132.0.47:50000/sap/opu/odata/sap/C_GLACCOUNTHIERARCHYNODE_SRV/C_GLAccountHierarchyNode(GLAccountHierarchy='%24DE1',HierarchyNode='00BSNOTES',ValidityEndDate=datetime'9999-12-31T00%3A00%3A00')",
+          "uri": "http://10.132.0.47:50000/sap/opu/odata/sap/C_GLACCOUNTHIERARCHYNODE_SRV/C_GLAccountHierarchyNode(GLAccountHierarchy='%24DE1',HierarchyNode='00BSNOTES',ValidityEndDate=datetime'9999-12-31T00%3A00%3A00')",
+          "type": "C_GLACCOUNTHIERARCHYNODE_SRV.C_GLAccountHierarchyNodeType"
+        },
+        "GLAccountHierarchy": "$DE1",
+        "HierarchyNode": "00BSNOTES",
+        "ValidityEndDate": "/Date(253402214400000)/",
+        "ParentNode": "0$DE1",
+        "HierarchyVersion": "1",
+        "ValidityStartDate": "/Date(1569369600000)/",
+        "ChartOfAccounts": "",
+        "GLAccount": "",
+        "SequenceNumber": "00000500BSNOTES",
+        "HierarchyNodeLevel": "2",
+        "NodeType": "N",
+        "SemanticTag": "",
+        "SACAccountType": "EXP",
+        "to_GLAccountInChartOfAccounts": {
+          "__deferred": {
+            "uri": "http://10.132.0.47:50000/sap/opu/odata/sap/C_GLACCOUNTHIERARCHYNODE_SRV/C_GLAccountHierarchyNode(GLAccountHierarchy='%24DE1',HierarchyNode='00BSNOTES',ValidityEndDate=datetime'9999-12-31T00%3A00%3A00')/to_GLAccountInChartOfAccounts"
+          }
+        },
+        "to_Text": {
+          "__deferred": {
+            "uri": "http://10.132.0.47:50000/sap/opu/odata/sap/C_GLACCOUNTHIERARCHYNODE_SRV/C_GLAccountHierarchyNode(GLAccountHierarchy='%24DE1',HierarchyNode='00BSNOTES',ValidityEndDate=datetime'9999-12-31T00%3A00%3A00')/to_Text"
+          }
+        }
+      },
+      {
+        "__metadata": {
+          "id": "http://10.132.0.47:50000/sap/opu/odata/sap/C_GLACCOUNTHIERARCHYNODE_SRV/C_GLAccountHierarchyNode(GLAccountHierarchy='%24DE1',HierarchyNode='00LIABILITS',ValidityEndDate=datetime'9999-12-31T00%3A00%3A00')",
+          "uri": "http://10.132.0.47:50000/sap/opu/odata/sap/C_GLACCOUNTHIERARCHYNODE_SRV/C_GLAccountHierarchyNode(GLAccountHierarchy='%24DE1',HierarchyNode='00LIABILITS',ValidityEndDate=datetime'9999-12-31T00%3A00%3A00')",
+          "type": "C_GLACCOUNTHIERARCHYNODE_SRV.C_GLAccountHierarchyNodeType"
+        },
+        "GLAccountHierarchy": "$DE1",
+        "HierarchyNode": "00LIABILITS",
+        "ValidityEndDate": "/Date(253402214400000)/",
+        "ParentNode": "0$DE1",
+        "HierarchyVersion": "1",
+        "ValidityStartDate": "/Date(1569369600000)/",
+        "ChartOfAccounts": "",
+        "GLAccount": "",
+        "SequenceNumber": "00000200LIABILITS",
+        "HierarchyNodeLevel": "2",
+        "NodeType": "N",
+        "SemanticTag": "",
+        "SACAccountType": "EXP",
+        "to_GLAccountInChartOfAccounts": {
+          "__deferred": {
+            "uri": "http://10.132.0.47:50000/sap/opu/odata/sap/C_GLACCOUNTHIERARCHYNODE_SRV/C_GLAccountHierarchyNode(GLAccountHierarchy='%24DE1',HierarchyNode='00LIABILITS',ValidityEndDate=datetime'9999-12-31T00%3A00%3A00')/to_GLAccountInChartOfAccounts"
+          }
+        },
+        "to_Text": {
+          "__deferred": {
+            "uri": "http://10.132.0.47:50000/sap/opu/odata/sap/C_GLACCOUNTHIERARCHYNODE_SRV/C_GLAccountHierarchyNode(GLAccountHierarchy='%24DE1',HierarchyNode='00LIABILITS',ValidityEndDate=datetime'9999-12-31T00%3A00%3A00')/to_Text"
+          }
+        }
+      },
+      {
+        "__metadata": {
+          "id": "http://10.132.0.47:50000/sap/opu/odata/sap/C_GLACCOUNTHIERARCHYNODE_SRV/C_GLAccountHierarchyNode(GLAccountHierarchy='%24DE1',HierarchyNode='00NOTASSGND',ValidityEndDate=datetime'9999-12-31T00%3A00%3A00')",
+          "uri": "http://10.132.0.47:50000/sap/opu/odata/sap/C_GLACCOUNTHIERARCHYNODE_SRV/C_GLAccountHierarchyNode(GLAccountHierarchy='%24DE1',HierarchyNode='00NOTASSGND',ValidityEndDate=datetime'9999-12-31T00%3A00%3A00')",
+          "type": "C_GLACCOUNTHIERARCHYNODE_SRV.C_GLAccountHierarchyNodeType"
+        },
+        "GLAccountHierarchy": "$DE1",
+        "HierarchyNode": "00NOTASSGND",
+        "ValidityEndDate": "/Date(253402214400000)/",
+        "ParentNode": "0$DE1",
+        "HierarchyVersion": "1",
+        "ValidityStartDate": "/Date(1569369600000)/",
+        "ChartOfAccounts": "",
+        "GLAccount": "",
+        "SequenceNumber": "00000400NOTASSGND",
+        "HierarchyNodeLevel": "2",
+        "NodeType": "N",
+        "SemanticTag": "",
+        "SACAccountType": "EXP",
+        "to_GLAccountInChartOfAccounts": {
+          "__deferred": {
+            "uri": "http://10.132.0.47:50000/sap/opu/odata/sap/C_GLACCOUNTHIERARCHYNODE_SRV/C_GLAccountHierarchyNode(GLAccountHierarchy='%24DE1',HierarchyNode='00NOTASSGND',ValidityEndDate=datetime'9999-12-31T00%3A00%3A00')/to_GLAccountInChartOfAccounts"
+          }
+        },
+        "to_Text": {
+          "__deferred": {
+            "uri": "http://10.132.0.47:50000/sap/opu/odata/sap/C_GLACCOUNTHIERARCHYNODE_SRV/C_GLAccountHierarchyNode(GLAccountHierarchy='%24DE1',HierarchyNode='00NOTASSGND',ValidityEndDate=datetime'9999-12-31T00%3A00%3A00')/to_Text"
+          }
+        }
+      },
+      {
+        "__metadata": {
+          "id": "http://10.132.0.47:50000/sap/opu/odata/sap/C_GLACCOUNTHIERARCHYNODE_SRV/C_GLAccountHierarchyNode(GLAccountHierarchy='%24DE1',HierarchyNode='01010000',ValidityEndDate=datetime'9999-12-31T00%3A00%3A00')",
+          "uri": "http://10.132.0.47:50000/sap/opu/odata/sap/C_GLACCOUNTHIERARCHYNODE_SRV/C_GLAccountHierarchyNode(GLAccountHierarchy='%24DE1',HierarchyNode='01010000',ValidityEndDate=datetime'9999-12-31T00%3A00%3A00')",
+          "type": "C_GLACCOUNTHIERARCHYNODE_SRV.C_GLAccountHierarchyNodeType"
+        },
+        "GLAccountHierarchy": "$DE1",
+        "HierarchyNode": "01010000",
+        "ValidityEndDate": "/Date(253402214400000)/",
+        "ParentNode": "00ASSETS",
+        "HierarchyVersion": "1",
+        "ValidityStartDate": "/Date(1569369600000)/",
+        "ChartOfAccounts": "",
+        "GLAccount": "",
+        "SequenceNumber": "00000101010000",
+        "HierarchyNodeLevel": "3",
+        "NodeType": "N",
+        "SemanticTag": "",
+        "SACAccountType": "EXP",
+        "to_GLAccountInChartOfAccounts": {
+          "__deferred": {
+            "uri": "http://10.132.0.47:50000/sap/opu/odata/sap/C_GLACCOUNTHIERARCHYNODE_SRV/C_GLAccountHierarchyNode(GLAccountHierarchy='%24DE1',HierarchyNode='01010000',ValidityEndDate=datetime'9999-12-31T00%3A00%3A00')/to_GLAccountInChartOfAccounts"
+          }
+        },
+        "to_Text": {
+          "__deferred": {
+            "uri": "http://10.132.0.47:50000/sap/opu/odata/sap/C_GLACCOUNTHIERARCHYNODE_SRV/C_GLAccountHierarchyNode(GLAccountHierarchy='%24DE1',HierarchyNode='01010000',ValidityEndDate=datetime'9999-12-31T00%3A00%3A00')/to_Text"
+          }
+        }
+      },
+      {
+        "__metadata": {
+          "id": "http://10.132.0.47:50000/sap/opu/odata/sap/C_GLACCOUNTHIERARCHYNODE_SRV/C_GLAccountHierarchyNode(GLAccountHierarchy='%24DE1',HierarchyNode='01011000',ValidityEndDate=datetime'9999-12-31T00%3A00%3A00')",
+          "uri": "http://10.132.0.47:50000/sap/opu/odata/sap/C_GLACCOUNTHIERARCHYNODE_SRV/C_GLAccountHierarchyNode(GLAccountHierarchy='%24DE1',HierarchyNode='01011000',ValidityEndDate=datetime'9999-12-31T00%3A00%3A00')",
+          "type": "C_GLACCOUNTHIERARCHYNODE_SRV.C_GLAccountHierarchyNodeType"
+        },
+        "GLAccountHierarchy": "$DE1",
+        "HierarchyNode": "01011000",
+        "ValidityEndDate": "/Date(253402214400000)/",
+        "ParentNode": "01010000",
+        "HierarchyVersion": "1",
+        "ValidityStartDate": "/Date(1569369600000)/",
+        "ChartOfAccounts": "",
+        "GLAccount": "",
+        "SequenceNumber": "00000101011000",
+        "HierarchyNodeLevel": "4",
+        "NodeType": "N",
+        "SemanticTag": "",
+        "SACAccountType": "EXP",
+        "to_GLAccountInChartOfAccounts": {
+          "__deferred": {
+            "uri": "http://10.132.0.47:50000/sap/opu/odata/sap/C_GLACCOUNTHIERARCHYNODE_SRV/C_GLAccountHierarchyNode(GLAccountHierarchy='%24DE1',HierarchyNode='01011000',ValidityEndDate=datetime'9999-12-31T00%3A00%3A00')/to_GLAccountInChartOfAccounts"
+          }
+        },
+        "to_Text": {
+          "__deferred": {
+            "uri": "http://10.132.0.47:50000/sap/opu/odata/sap/C_GLACCOUNTHIERARCHYNODE_SRV/C_GLAccountHierarchyNode(GLAccountHierarchy='%24DE1',HierarchyNode='01011000',ValidityEndDate=datetime'9999-12-31T00%3A00%3A00')/to_Text"
+          }
+        }
+      },
+      {
+        "__metadata": {
+          "id": "http://10.132.0.47:50000/sap/opu/odata/sap/C_GLACCOUNTHIERARCHYNODE_SRV/C_GLAccountHierarchyNode(GLAccountHierarchy='%24DE1',HierarchyNode='01011100',ValidityEndDate=datetime'9999-12-31T00%3A00%3A00')",
+          "uri": "http://10.132.0.47:50000/sap/opu/odata/sap/C_GLACCOUNTHIERARCHYNODE_SRV/C_GLAccountHierarchyNode(GLAccountHierarchy='%24DE1',HierarchyNode='01011100',ValidityEndDate=datetime'9999-12-31T00%3A00%3A00')",
+          "type": "C_GLACCOUNTHIERARCHYNODE_SRV.C_GLAccountHierarchyNodeType"
+        },
+        "GLAccountHierarchy": "$DE1",
+        "HierarchyNode": "01011100",
+        "ValidityEndDate": "/Date(253402214400000)/",
+        "ParentNode": "01011000",
+        "HierarchyVersion": "1",
+        "ValidityStartDate": "/Date(1569369600000)/",
+        "ChartOfAccounts": "",
+        "GLAccount": "",
+        "SequenceNumber": "00000101011100",
+        "HierarchyNodeLevel": "5",
+        "NodeType": "N",
+        "SemanticTag": "",
+        "SACAccountType": "EXP",
+        "to_GLAccountInChartOfAccounts": {
+          "__deferred": {
+            "uri": "http://10.132.0.47:50000/sap/opu/odata/sap/C_GLACCOUNTHIERARCHYNODE_SRV/C_GLAccountHierarchyNode(GLAccountHierarchy='%24DE1',HierarchyNode='01011100',ValidityEndDate=datetime'9999-12-31T00%3A00%3A00')/to_GLAccountInChartOfAccounts"
+          }
+        },
+        "to_Text": {
+          "__deferred": {
+            "uri": "http://10.132.0.47:50000/sap/opu/odata/sap/C_GLACCOUNTHIERARCHYNODE_SRV/C_GLAccountHierarchyNode(GLAccountHierarchy='%24DE1',HierarchyNode='01011100',ValidityEndDate=datetime'9999-12-31T00%3A00%3A00')/to_Text"
+          }
+        }
+      },
+      {
+        "__metadata": {
+          "id": "http://10.132.0.47:50000/sap/opu/odata/sap/C_GLACCOUNTHIERARCHYNODE_SRV/C_GLAccountHierarchyNode(GLAccountHierarchy='%24DE1',HierarchyNode='01011200',ValidityEndDate=datetime'9999-12-31T00%3A00%3A00')",
+          "uri": "http://10.132.0.47:50000/sap/opu/odata/sap/C_GLACCOUNTHIERARCHYNODE_SRV/C_GLAccountHierarchyNode(GLAccountHierarchy='%24DE1',HierarchyNode='01011200',ValidityEndDate=datetime'9999-12-31T00%3A00%3A00')",
+          "type": "C_GLACCOUNTHIERARCHYNODE_SRV.C_GLAccountHierarchyNodeType"
+        },
+        "GLAccountHierarchy": "$DE1",
+        "HierarchyNode": "01011200",
+        "ValidityEndDate": "/Date(253402214400000)/",
+        "ParentNode": "01011000",
+        "HierarchyVersion": "1",
+        "ValidityStartDate": "/Date(1569369600000)/",
+        "ChartOfAccounts": "",
+        "GLAccount": "",
+        "SequenceNumber": "00000201011200",
+        "HierarchyNodeLevel": "5",
+        "NodeType": "N",
+        "SemanticTag": "",
+        "SACAccountType": "EXP",
+        "to_GLAccountInChartOfAccounts": {
+          "__deferred": {
+            "uri": "http://10.132.0.47:50000/sap/opu/odata/sap/C_GLACCOUNTHIERARCHYNODE_SRV/C_GLAccountHierarchyNode(GLAccountHierarchy='%24DE1',HierarchyNode='01011200',ValidityEndDate=datetime'9999-12-31T00%3A00%3A00')/to_GLAccountInChartOfAccounts"
+          }
+        },
+        "to_Text": {
+          "__deferred": {
+            "uri": "http://10.132.0.47:50000/sap/opu/odata/sap/C_GLACCOUNTHIERARCHYNODE_SRV/C_GLAccountHierarchyNode(GLAccountHierarchy='%24DE1',HierarchyNode='01011200',ValidityEndDate=datetime'9999-12-31T00%3A00%3A00')/to_Text"
+          }
+        }
+      },
+      {
+        "__metadata": {
+          "id": "http://10.132.0.47:50000/sap/opu/odata/sap/C_GLACCOUNTHIERARCHYNODE_SRV/C_GLAccountHierarchyNode(GLAccountHierarchy='%24DE1',HierarchyNode='01011300',ValidityEndDate=datetime'9999-12-31T00%3A00%3A00')",
+          "uri": "http://10.132.0.47:50000/sap/opu/odata/sap/C_GLACCOUNTHIERARCHYNODE_SRV/C_GLAccountHierarchyNode(GLAccountHierarchy='%24DE1',HierarchyNode='01011300',ValidityEndDate=datetime'9999-12-31T00%3A00%3A00')",
+          "type": "C_GLACCOUNTHIERARCHYNODE_SRV.C_GLAccountHierarchyNodeType"
+        },
+        "GLAccountHierarchy": "$DE1",
+        "HierarchyNode": "01011300",
+        "ValidityEndDate": "/Date(253402214400000)/",
+        "ParentNode": "01011000",
+        "HierarchyVersion": "1",
+        "ValidityStartDate": "/Date(1569369600000)/",
+        "ChartOfAccounts": "",
+        "GLAccount": "",
+        "SequenceNumber": "00000301011300",
+        "HierarchyNodeLevel": "5",
+        "NodeType": "N",
+        "SemanticTag": "",
+        "SACAccountType": "EXP",
+        "to_GLAccountInChartOfAccounts": {
+          "__deferred": {
+            "uri": "http://10.132.0.47:50000/sap/opu/odata/sap/C_GLACCOUNTHIERARCHYNODE_SRV/C_GLAccountHierarchyNode(GLAccountHierarchy='%24DE1',HierarchyNode='01011300',ValidityEndDate=datetime'9999-12-31T00%3A00%3A00')/to_GLAccountInChartOfAccounts"
+          }
+        },
+        "to_Text": {
+          "__deferred": {
+            "uri": "http://10.132.0.47:50000/sap/opu/odata/sap/C_GLACCOUNTHIERARCHYNODE_SRV/C_GLAccountHierarchyNode(GLAccountHierarchy='%24DE1',HierarchyNode='01011300',ValidityEndDate=datetime'9999-12-31T00%3A00%3A00')/to_Text"
+          }
+        }
+      }
+    ]
+  }
+}

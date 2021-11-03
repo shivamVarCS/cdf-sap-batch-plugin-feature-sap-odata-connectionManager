@@ -1,0 +1,191 @@
+{
+  "metadata": {
+    "spec-version": "1.5"
+  },
+  "display-name": "SAP OData",
+  "configuration-groups": [
+    {
+      "label": "Basic",
+      "properties": [
+        {
+          "widget-type": "textbox",
+          "label": "Reference Name",
+          "name": "referenceName",
+          "widget-attributes": {
+            "placeholder": "Used to uniquely identify this source for lineage, annotating metadata etc."
+          }
+        },
+        {
+          "widget-type": "textbox",
+          "label": "SAP OData Base URL",
+          "name": "baseURL",
+          "widget-attributes": {
+            "placeholder": "SAP OData base url e.g. http://<ip:port>, https://<hostname>"
+          }
+        },
+        {
+          "widget-type": "radio-group",
+          "label": "OData Version",
+          "name": "oDataVersion",
+          "widget-attributes": {
+            "layout": "inline",
+            "default": "v2",
+            "options": [
+              {
+                "id": "v2",
+                "label": "OData Version 2.0"
+              }
+            ]
+          }
+        },
+        {
+          "widget-type": "textbox",
+          "label": "Service Name",
+          "name": "serviceName",
+          "widget-attributes": {
+            "placeholder": "SAP OData service name. Ex: TripPinServiceRW"
+          }
+        },
+        {
+          "widget-type": "textbox",
+          "label": "Entity Name",
+          "name": "entityName",
+          "widget-attributes": {
+            "placeholder": "SAP OData Entity name. Ex: People"
+          },
+          "plugin-function": {
+            "method": "POST",
+            "widget": "outputSchema",
+            "plugin-method": "getSchema"
+          }
+        }
+      ]
+    },
+    {
+      "label": "Credentials",
+      "properties": [
+        {
+          "widget-type": "radio-group",
+          "label": "Security Type",
+          "name": "securityType",
+          "widget-attributes": {
+            "layout": "inline",
+            "default": "basic",
+            "options": [
+              {
+                "id": "basic",
+                "label": "Basic (via Username and Password)"
+              }
+            ]
+          }
+        },
+        {
+          "widget-type": "textbox",
+          "label": "SAP Logon Username",
+          "name": "username",
+          "widget-attributes": {
+            "placeholder": ""
+          }
+        },
+        {
+          "widget-type": "password",
+          "label": "SAP Logon Password",
+          "name": "password",
+          "widget-attributes": {
+            "placeholder": ""
+          }
+        }
+      ]
+    },
+    {
+      "label": "SAP X.509 Client Certificate",
+      "properties": [
+        {
+          "widget-type": "textbox",
+          "label": "GCP Project ID",
+          "name": "gcpProjectId",
+          "widget-attributes": {
+            "default": "auto-detect"
+          }
+        },
+        {
+          "widget-type": "textbox",
+          "label": "GCS Path",
+          "name": "certGcsPath",
+          "widget-attributes": {
+            "placeholder": "Google Cloud Storage path having X.509 certificate. Ex: gs://sap-dependent-files/v3_0_20/sap_identity.jks"
+          }
+        },
+        {
+          "widget-type": "password",
+          "label": "Passphrase",
+          "name": "certPassphrase",
+          "widget-attributes": {
+            "placeholder": "Passphrase corresponding to the provided X.509 certificate."
+          }
+        }
+      ]
+    },
+    {
+      "label": "Advanced",
+      "properties": [
+        {
+          "widget-type": "textarea",
+          "label": "Filter Options",
+          "name": "filterOption",
+          "widget-attributes": {
+            "placeholder": "Ex: Price gt 200"
+          }
+        },
+        {
+          "widget-type": "textarea",
+          "label": "Select Fields",
+          "name": "selectOption",
+          "widget-attributes": {
+            "placeholder": "Ex: Category,Price,Name,Supplier/Address"
+          }
+        },
+        {
+          "widget-type": "textbox",
+          "label": "Expand Fields",
+          "name": "expandOption",
+          "widget-attributes": {
+            "placeholder": "Ex: Products,Products/Suppliers"
+          }
+        },
+        {
+          "widget-type": "number",
+          "label": "Number of Rows to Skip",
+          "name": "skipRowCount",
+          "widget-attributes": {
+            "min": "0"
+          }
+        },
+        {
+          "widget-type": "number",
+          "label": "Number of Rows to Fetch",
+          "name": "numRowsToFetch",
+          "widget-attributes": {
+            "min": "0"
+          }
+        },
+        {
+          "widget-type": "number",
+          "label": "Number of Splits to Generate",
+          "name": "splitCount",
+          "widget-attributes": {
+            "min": "0"
+          }
+        },
+        {
+          "widget-type": "number",
+          "label": "Batch Size",
+          "name": "batchSize",
+          "widget-attributes": {
+            "min": "0"
+          }
+        }
+      ]
+    }
+  ]
+}

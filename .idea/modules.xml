@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/sap-common/sap-common.iml" filepath="$PROJECT_DIR$/sap-common/sap-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sap-common-jco/sap-common-jco.iml" filepath="$PROJECT_DIR$/sap-common-jco/sap-common-jco.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sap-odata-plugins/sap-odata-plugins.iml" filepath="$PROJECT_DIR$/sap-odata-plugins/sap-odata-plugins.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sap-odp-plugins/sap-odp-plugins.iml" filepath="$PROJECT_DIR$/sap-odp-plugins/sap-odp-plugins.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sap-plugins.iml" filepath="$PROJECT_DIR$/sap-plugins.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sap-table-plugins/sap-table-plugins.iml" filepath="$PROJECT_DIR$/sap-table-plugins/sap-table-plugins.iml" />
+    </modules>
+  </component>
+</project>
